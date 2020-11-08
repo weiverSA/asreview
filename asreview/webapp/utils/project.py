@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
@@ -72,6 +73,7 @@ def init_project(project_id,
             'name': project_name,
             'description': project_description,
             'authors': project_authors,
+            'created_at_unix': int(time.time()),
             'mode': project_mode,
 
             # project related variables
