@@ -34,6 +34,9 @@ from asreview.webapp.utils.paths import get_kwargs_path
 from asreview.webapp.utils.paths import list_asreview_project_paths
 from asreview.webapp.utils.validation import is_project
 
+# defaults
+PROJECT_MODES = ["oracle", "explore", "simulate"]
+
 
 def _get_executable():
     """Get the Python executable"""
@@ -58,6 +61,9 @@ def init_project(project_id,
             and len(project_id) >= 3:
         raise ValueError("Project name should be at least 3 characters.")
 
+    if project_mode not in PROJECT_MODES:
+        raise ValueError(f"Project mode {project_mode} doesn't exist.")
+
     if is_project(project_id):
         raise ValueError("Project already exists.")
 
@@ -68,6 +74,7 @@ def init_project(project_id,
         reviewFinished = project_mode == "SIMULATION"
 
         project_info = {
+            # general variables
             'version': asreview_version,  # todo: Fail without git?
             'id': project_id,
             'name': project_name,
@@ -80,6 +87,8 @@ def init_project(project_id,
             'projectSetupReady': False,
             'projectInitReady': False,
             'reviewFinished': reviewFinished,
+
+            # simulation related variables
             'simulations': []
         }
 
@@ -117,14 +126,22 @@ def enrich_project_info(project_id, project_info):
 def migrate_project_info(project_info):
     # backwards support <0.10
     if "projectInitReady" not in project_info:
-        if project_info["projectHasPriorKnowledge"]:
-            project_info["projectInitReady"] = True
+        if "projectHasPriorKnowledge" in project_info:
+            if project_info["projectHasPriorKnowledge"]:
+                project_info["projectInitReady"] = True
+            else:
+                project_info["projectInitReady"] = False
         else:
-            project_info["projectInitReady"] = False
+            project_info["projectInitReady"] = True
+            project_info["projectHasPriorKnowledge"] = True
 
     # backwards support <0.10
     if "mode" not in project_info:
         project_info["mode"] = "oracle"
+
+    # if time is not available (<0.14)
+    if "created_at_unix" not in project_info:
+        project_info["created_at_unix"] = None
 
     # backwards support prior to simulations
     if "projectSetupReady" not in project_info:

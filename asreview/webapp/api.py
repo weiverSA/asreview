@@ -119,13 +119,8 @@ def api_get_projects():  # noqa: F401
             with open(proj / "project.json", "r") as f:
                 res = json.load(f)
 
-            # backwards support <0.10
-            if "projectInitReady" not in res:
-                res["projectInitReady"] = True
-
-            # if time is not available (<0.14)
-            if "created_at_unix" not in res:
-                res["created_at_unix"] = None
+            # backwards compat
+            res = migrate_project_info(res)
 
             logging.info("Project found: {}".format(res["id"]))
 
