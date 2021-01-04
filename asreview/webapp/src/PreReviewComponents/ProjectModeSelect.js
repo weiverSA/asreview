@@ -47,7 +47,7 @@ export default function ProjectModeSelect(props) {
               />
             </ListItem>
           </MenuItem>
-          <MenuItem value={projectModes.SIMULATION} component='div'>
+          <MenuItem value={projectModes.EXPLORATION} component='div'>
             <ListItem>
               <ListItemText
                 primary="Exploration"
@@ -55,7 +55,7 @@ export default function ProjectModeSelect(props) {
               />
             </ListItem>
           </MenuItem>
-          <MenuItem value={projectModes.EXPLORATION} component='div'>
+          <MenuItem value={projectModes.SIMULATION} component='div'>
             <ListItem>
               <ListItemText
                 primary="Simulation"
