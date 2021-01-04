@@ -165,7 +165,6 @@ const Projects = (props) => {
                         name={project.name}
                         mode={project.mode}
                         description={project.description}
-                        projectInitReady={project.projectInitReady}
                         handleAppState={props.handleAppState}
                         refreshProjects={refreshProjects}
                       />

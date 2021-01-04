@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import purple from '@material-ui/core/colors/purple';
 
 import store from './redux/store'
 import { setProject } from './redux/actions'
@@ -19,13 +20,17 @@ const useStyles = makeStyles(theme => ({
   content: {
     height: 140,
   },
-  modeSimulation: {
+  modeSimulate: {
     marginBottom: 4,
-    backgroundColor: theme.palette.warning.light
+    backgroundColor: theme.palette.error.light
   },
   modeOracle: {
     marginBottom: 4,
-    backgroundColor: theme.palette.grey.light,
+    backgroundColor: theme.palette.warning.light,
+  },
+  modeExplore: {
+    marginBottom: 4,
+    backgroundColor: theme.palette.info.light,
   },
   description: {
     display: "-webkit-box",
@@ -35,8 +40,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const ProjectCard = (props) => {
   const classes = useStyles();
+
+  // define classes
+  const modeColors = {
+     [projectModes.ORACLE]: classes.modeOracle,
+     [projectModes.EXPLORATION]: classes.modeExplore,
+     [projectModes.SIMULATION]: classes.modeSimulate,
+  }
 
   const openExistingProject = () => {
 
@@ -52,30 +65,14 @@ const ProjectCard = (props) => {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        {/*<CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="ASReview Project"
-        />*/}
         <CardContent
           className={classes.content}
         >
-          {props.mode && props.mode === projectModes.ORACLE && (
-            <Chip
-              size="small"
-              label={props.mode}
-              className={classes.modeOracle}
-              />
-          )}
-
-          {props.mode && props.mode === projectModes.SIMULATION && (
-            <Chip
-              size="small"
-              label={props.mode}
-              className={classes.modeSimulation}
-              />
-          )}
-
+          <Chip
+            size="small"
+            label={props.mode}
+            className={props.mode && modeColors[props.mode]}
+          />
           <Typography gutterBottom variant="h5" component="h2">
             {props.name}
           </Typography>

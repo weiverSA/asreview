@@ -87,20 +87,20 @@ const ProjectPage = (props) => {
   }, [props.project_id]);
 
   const Page = () => {
-    if (state.info && state.info.mode === projectModes.ORACLE) {
-      return <ProjectPageOracle 
+    if (state.info && (state.info.mode === projectModes.ORACLE || state.info.mode === projectModes.EXPLORATION)) {
+      return <ProjectPageOracle
         classes={classes}
         info={state.info}
         toggleExportResult={props.toggleExportResult}
         handleAppState={props.handleAppState}
-      /> 
+      />
     }
     if (state.info && state.info.mode === projectModes.SIMULATION) {
-      return <ProjectPageSimulation 
+      return <ProjectPageSimulation
         classes={classes}
         info={state.info}
         toggleExportResult={props.toggleExportResult}
-      /> 
+      />
     }
     return null
   }

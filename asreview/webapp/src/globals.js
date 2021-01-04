@@ -22,6 +22,6 @@ export const mapStateToProps = state => {
 // enums
 export const projectModes = {
   ORACLE: 'oracle',
-  SIMULATION: 'simulation',
-  EXPLORATION: 'exploration',  
+  SIMULATION: 'simulate',
+  EXPLORATION: 'explore',
 }
