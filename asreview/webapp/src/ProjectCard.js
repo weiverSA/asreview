@@ -5,7 +5,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
-import purple from '@material-ui/core/colors/purple';
 
 import store from './redux/store'
 import { setProject } from './redux/actions'
