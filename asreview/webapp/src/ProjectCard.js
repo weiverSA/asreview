@@ -2,10 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import purple from '@material-ui/core/colors/purple';
 
@@ -64,7 +62,9 @@ const ProjectCard = (props) => {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea
+        onClick={openExistingProject}
+      >
         <CardContent
           className={classes.content}
         >
@@ -86,14 +86,6 @@ const ProjectCard = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button
-          size="small"
-          onClick={openExistingProject}
-        >
-          Open
-        </Button>
-      </CardActions>
     </Card>
   );
 }
