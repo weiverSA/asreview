@@ -1,6 +1,8 @@
 Prepare your Data
 =================
 
+Just edit directly in the document.
+
 To perform a systematic review, ASReview requires a dataset representing
 all records (e.g., abstracts of scientific papers) obtained in a systematic
 search. To create such a dataset for a systematic review, typically an `online
